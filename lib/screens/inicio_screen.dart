@@ -3,11 +3,24 @@ import 'package:canellas_panificacao/screens/detalhes_receita_screen.dart';
 import 'package:canellas_panificacao/widgets/receita_card.dart';
 import 'package:flutter/material.dart';
 
-class InicioScreen extends StatelessWidget {
+class InicioScreen extends StatefulWidget {
   const InicioScreen({super.key});
 
   @override
+  State<InicioScreen> createState() => _InicioScreenState();
+}
+
+  class _InicioScreenState extends State<InicioScreen> {
+    String textoPesquisa = '';
+
+  @override
   Widget build(BuildContext context) {
+    final receitasFiltradas = receitas.where((receita) {
+      return receita.nome
+        .toLowerCase()
+        .contains(textoPesquisa.toLowerCase());
+    }).toList();
+
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -39,10 +52,28 @@ class InicioScreen extends StatelessWidget {
             style: TextStyle(fontSize: 16),
           ),
 
+          const SizedBox(height: 20),
+
+          TextField(
+            decoration: InputDecoration(
+              hintText: 'Pesquisar receitas...',
+              prefixIcon: const Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+
+            onChanged: (texto) {
+              setState(() {
+                textoPesquisa = texto;
+              });
+            },
+          ),
+
           const SizedBox(height: 24),
 
           const Text(
-            'Nossas receitas',
+            'Receitas',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 21,
@@ -52,7 +83,18 @@ class InicioScreen extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          ...receitas.map(
+          if (receitasFiltradas.isEmpty)
+            const Padding(
+              padding: EdgeInsets.all(20),
+              child: Center(
+                child: Text(
+                  'Nenhuma receita encontrada.',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            )
+          else
+          ...receitasFiltradas.map(
             (receita) => ReceitaCard(
               receita: receita,
               onTap: () {
@@ -73,3 +115,5 @@ class InicioScreen extends StatelessWidget {
     );
   }
 }
+ 
+

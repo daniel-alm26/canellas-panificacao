@@ -19,24 +19,3 @@ class CanellasPanificacaoApp extends StatelessWidget {
   }
 }
 
-// class InicioScreen extends StatelessWidget {
-  
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Canellas Panificação'),
-//       ),
-//       body: Center(
-//         child: Text(
-//           'Encontre sua próxima receita!',
-//           style: TextStyle(
-//             fontSize: 22,
-//             fontWeight: FontWeight.bold,
-//           ),
-//           textAlign: TextAlign.center,          
-//         ),
-//       ),
-//     );
-//   }
-// }

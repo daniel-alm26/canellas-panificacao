@@ -38,7 +38,6 @@ class ReceitaCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     receita!.nome,
@@ -48,7 +47,10 @@ class ReceitaCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(receita!.descricao),
+                  Text(
+                    receita!.descricao, 
+                    // textAlign: TextAlign.justify,
+                  ),
                   const SizedBox(height: 12),
                   Row(
                     children: [
@@ -57,17 +59,17 @@ class ReceitaCard extends StatelessWidget {
                       Text('${receita!.tempoDePreparo} minutos'),
                       const Spacer(),
                       Text(receita!.categoria),
-                    ]
+                    ],
                   ),
                   const SizedBox(height: 10),
                   if (!receita!.semGlutenVerificado)
-                  const Text(
-                    'Verificação alimentar pendente',
-                    style: TextStyle(
-                      color: Colors.deepOrange,
-                      fontWeight: FontWeight.w600,
+                    const Text(
+                      'Verificação alimentar pendente',
+                      style: TextStyle(
+                        color: Colors.deepOrange,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  )
                 ],
               ),
             ),
