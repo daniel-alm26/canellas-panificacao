@@ -10,7 +10,12 @@ class InicioScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Canellas Panificação'),
+        title: Image.asset(
+          'assets/images/logo.png',
+          height: 40,
+        ),
+        // title: const Text('Canellas Panificação'),
+        centerTitle: true,
         backgroundColor: Colors.green.shade100,
       ),
 
@@ -19,6 +24,7 @@ class InicioScreen extends StatelessWidget {
         children: [
           const Text(
             'Encontre sua próxima receita!',
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
@@ -29,6 +35,7 @@ class InicioScreen extends StatelessWidget {
 
           const Text(
             'Explore novas ideias para suas refeições.',
+            textAlign: TextAlign.center,
             style: TextStyle(fontSize: 16),
           ),
 
@@ -36,6 +43,7 @@ class InicioScreen extends StatelessWidget {
 
           const Text(
             'Nossas receitas',
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 21,
               fontWeight: FontWeight.bold,

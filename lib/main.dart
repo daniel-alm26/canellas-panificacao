@@ -1,3 +1,4 @@
+import 'package:canellas_panificacao/screens/inicio_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const CanellasPanificacaoApp());
@@ -18,24 +19,24 @@ class CanellasPanificacaoApp extends StatelessWidget {
   }
 }
 
-class InicioScreen extends StatelessWidget {
+// class InicioScreen extends StatelessWidget {
   
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Canellas Pacificação'),
-      ),
-      body: Center(
-        child: Text(
-          'Encontre sua próxima receita!',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.center,          
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Canellas Panificação'),
+//       ),
+//       body: Center(
+//         child: Text(
+//           'Encontre sua próxima receita!',
+//           style: TextStyle(
+//             fontSize: 22,
+//             fontWeight: FontWeight.bold,
+//           ),
+//           textAlign: TextAlign.center,          
+//         ),
+//       ),
+//     );
+//   }
+// }
