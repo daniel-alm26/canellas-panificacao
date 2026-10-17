@@ -1,6 +1,6 @@
 import "../models/receita.dart";
 
-List<Receita> receitas = [
+final List<Receita> receitas = [
   Receita(
     id: 1,
     nome: 'Panqueca de banana',

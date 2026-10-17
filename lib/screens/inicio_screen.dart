@@ -1,5 +1,6 @@
 import 'package:canellas_panificacao/data/receitas.dart';
 import 'package:canellas_panificacao/screens/detalhes_receita_screen.dart';
+import 'package:canellas_panificacao/screens/formulario_receita_screen.dart';
 import 'package:canellas_panificacao/widgets/receita_card.dart';
 import 'package:flutter/material.dart';
 
@@ -10,23 +11,18 @@ class InicioScreen extends StatefulWidget {
   State<InicioScreen> createState() => _InicioScreenState();
 }
 
-  class _InicioScreenState extends State<InicioScreen> {
-    String textoPesquisa = '';
+class _InicioScreenState extends State<InicioScreen> {
+  String textoPesquisa = '';
 
   @override
   Widget build(BuildContext context) {
     final receitasFiltradas = receitas.where((receita) {
-      return receita.nome
-        .toLowerCase()
-        .contains(textoPesquisa.toLowerCase());
+      return receita.nome.toLowerCase().contains(textoPesquisa.toLowerCase());
     }).toList();
 
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset(
-          'assets/images/logo.png',
-          height: 40,
-        ),
+        title: Image.asset('assets/images/logo.png', height: 40),
         // title: const Text('Canellas Panificação'),
         centerTitle: true,
         backgroundColor: Colors.green.shade100,
@@ -34,11 +30,19 @@ class InicioScreen extends StatefulWidget {
           IconButton(
             icon: const Icon(Icons.add),
             tooltip: 'Adicionar receita',
-            onPressed: () {},
-          ),          
-        ],        
-      ), 
-     
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FormularioReceitaScreen(),
+                ),
+              );
+
+              setState(() {});
+            },
+          ),
+        ],
+      ),
 
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -46,10 +50,7 @@ class InicioScreen extends StatefulWidget {
           const Text(
             'Encontre sua próxima receita!',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
 
           const SizedBox(height: 8),
@@ -83,10 +84,7 @@ class InicioScreen extends StatefulWidget {
           const Text(
             'Receitas',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 21,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
           ),
 
           const SizedBox(height: 16),
@@ -102,26 +100,22 @@ class InicioScreen extends StatefulWidget {
               ),
             )
           else
-          ...receitasFiltradas.map(
-            (receita) => ReceitaCard(
-              receita: receita,
-              onTap: () {
-                Navigator.push<void>(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (context) =>
-                      DetalhesReceitaScreen(
-                        receita: receita
-                      ),
-                  ),
-                );
-              },
-            )
-          )
+            ...receitasFiltradas.map(
+              (receita) => ReceitaCard(
+                receita: receita,
+                onTap: () {
+                  Navigator.push<void>(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (context) =>
+                          DetalhesReceitaScreen(receita: receita),
+                    ),
+                  );
+                },
+              ),
+            ),
         ],
       ),
     );
   }
 }
- 
-

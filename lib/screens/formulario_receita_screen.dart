@@ -1,3 +1,5 @@
+import 'package:canellas_panificacao/data/receitas.dart';
+import 'package:canellas_panificacao/models/receita.dart';
 import 'package:flutter/material.dart';
 
 class FormularioReceitaScreen extends StatefulWidget {
@@ -83,7 +85,7 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: _salvarReceita,
                 icon: const Icon(Icons.save),
                 label: const Text('Salvar receita'),
               ),
@@ -92,5 +94,45 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
         ),
       ),
     );
+  }
+
+  void _salvarReceita() {
+    final nome = _nomeController.text.trim();
+    final descricao = _descricaoController.text.trim();
+    final tempo = int.tryParse(_rendimentoController.text);
+    final rendimento = int.tryParse(_rendimentoController.text);
+
+    if (nome.isEmpty ||
+        descricao.isEmpty ||
+        tempo == null ||
+        rendimento == null ||
+        rendimento <= 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Preencha todos os dados corretamente.',
+          ),
+        ),
+      );
+      return;
+    }
+
+    final novaReceita = Receita(
+      id: receitas.isEmpty ? 1 : receitas
+        .map((receita) => receita.id)
+        .reduce((a, b) => a > b ? a : b) + 1, 
+        nome: nome, 
+        descricao: descricao, 
+        tempoDePreparo: tempo, 
+        rendimento: rendimento, 
+        ingredientes: [], 
+        modoDePreparo: [], 
+        categoria: 'Outras', 
+        semGlutenVerificado: false,
+    );
+
+    receitas.add(novaReceita);
+
+    Navigator.pop(context);
   }
 }
