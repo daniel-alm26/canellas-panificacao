@@ -30,7 +30,15 @@ class InicioScreen extends StatefulWidget {
         // title: const Text('Canellas Panificação'),
         centerTitle: true,
         backgroundColor: Colors.green.shade100,
-      ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            tooltip: 'Adicionar receita',
+            onPressed: () {},
+          ),          
+        ],        
+      ), 
+     
 
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -59,7 +67,7 @@ class InicioScreen extends StatefulWidget {
               hintText: 'Pesquisar receitas...',
               prefixIcon: const Icon(Icons.search),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(16),
               ),
             ),
 
