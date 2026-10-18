@@ -142,11 +142,13 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
         descricao.isEmpty ||
         tempo == null ||
         rendimento == null ||
-        rendimento <= 0) {
+        rendimento <= 0 ||
+        ingredientes.isEmpty ||
+        modoPreparo.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            'Preencha todos os dados corretamente.',
+            'Preencha todos os dados corretamente, incluindo ingredientes e modo de preparo.',
           ),
         ),
       );
