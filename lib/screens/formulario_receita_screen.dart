@@ -15,6 +15,8 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
   final _descricaoController = TextEditingController();
   final _tempoController = TextEditingController();
   final _rendimentoController = TextEditingController();
+  final _ingredientesController = TextEditingController();
+  final _modoPreparoController = TextEditingController();
 
   @override
   void dispose() {
@@ -22,6 +24,8 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
     _descricaoController.dispose();
     _tempoController.dispose();
     _rendimentoController.dispose();
+    _ingredientesController.dispose();
+    _modoPreparoController.dispose();
     super.dispose();
   }
 
@@ -58,6 +62,28 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
               maxLines: 3,
               decoration: const InputDecoration(
                 labelText: 'Descrição',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            TextField(
+              controller: _ingredientesController,
+              maxLines: 5,
+              decoration: const InputDecoration(
+                labelText: 'Ingredientes',
+                hintText: 'Digite um ingriente por linha',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            TextField(
+              controller: _modoPreparoController,
+              maxLines: 5,
+              decoration: const InputDecoration(
+                labelText: 'Modo de preparo',
+                hintText: 'Digite uma etapa por linha',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -101,6 +127,16 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
     final descricao = _descricaoController.text.trim();
     final tempo = int.tryParse(_rendimentoController.text);
     final rendimento = int.tryParse(_rendimentoController.text);
+    final ingredientes = _ingredientesController.text
+      .split('\n')
+      .map((item) => item.trim())
+      .where((item) => item.isNotEmpty)
+      .toList();
+    final modoPreparo = _modoPreparoController.text
+      .split('\n')
+      .map((item) => item.trim())
+      .where((etapa) => etapa.isNotEmpty)
+      .toList();
 
     if (nome.isEmpty ||
         descricao.isEmpty ||
@@ -125,8 +161,8 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
         descricao: descricao, 
         tempoDePreparo: tempo, 
         rendimento: rendimento, 
-        ingredientes: [], 
-        modoDePreparo: [], 
+        ingredientes: ingredientes, 
+        modoDePreparo: modoPreparo, 
         categoria: 'Outras', 
         semGlutenVerificado: false,
     );
