@@ -13,11 +13,18 @@ class InicioScreen extends StatefulWidget {
 
 class _InicioScreenState extends State<InicioScreen> {
   String textoPesquisa = '';
+  String categoriaSelecionada = 'Todas';
 
   @override
   Widget build(BuildContext context) {
     final receitasFiltradas = receitas.where((receita) {
-      return receita.nome.toLowerCase().contains(textoPesquisa.toLowerCase());
+      final correspondeNome = receita.nome
+        .toLowerCase()
+        .contains(textoPesquisa.toLowerCase());
+    
+      final correspondeCategoria = categoriaSelecionada == 'Todas' || receita.categoria == categoriaSelecionada;
+
+    return correspondeNome && correspondeCategoria;
     }).toList();
 
     return Scaffold(
@@ -75,6 +82,50 @@ class _InicioScreenState extends State<InicioScreen> {
             onChanged: (texto) {
               setState(() {
                 textoPesquisa = texto;
+              });
+            },
+          ),
+
+          const SizedBox(height: 12),
+
+          DropdownButtonFormField<String>(
+            initialValue: categoriaSelecionada,
+            decoration: const InputDecoration(
+              labelText: 'Filtrar por categoria',
+              border: OutlineInputBorder(),
+            ),
+
+            items: const[
+              DropdownMenuItem(
+                value: 'Todas',
+                child: Text('Todas as categorias'),
+              ),
+              DropdownMenuItem(
+                value: 'Café da manhã',
+                child: Text('Café da manhã'),
+              ),
+              DropdownMenuItem(
+                value: 'Almoço',
+                child: Text('Almoço'),
+              ),
+              DropdownMenuItem(
+                value: 'Jantar',
+                child: Text('Jantar'),
+              ),
+              DropdownMenuItem(
+                value: 'Sobremesa',
+                child: Text('Sobremesa'),
+              ),
+              DropdownMenuItem(
+                value: 'Outras',
+                child: Text('Outras'),
+              ),
+            ],
+            onChanged: (categoria) {
+              if (categoria == null) return;
+
+              setState(() {
+                categoriaSelecionada = categoria;
               });
             },
           ),

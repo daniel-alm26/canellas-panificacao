@@ -38,126 +38,128 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
         title: const Text('Nova Receita'),
         backgroundColor: Colors.green.shade100,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Cadastre sua receita',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-
-            TextField(
-              controller: _nomeController,
-              decoration: const InputDecoration(
-                labelText: 'Nome da Receita',
-                border: OutlineInputBorder(),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Cadastre sua receita',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-            ),
-            const SizedBox(height: 16),
-
-            TextField(
-              controller: _descricaoController,
-              maxLines: 3,
-              decoration: const InputDecoration(
-                labelText: 'Descrição',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            TextField(
-              controller: _ingredientesController,
-              maxLines: 5,
-              decoration: const InputDecoration(
-                labelText: 'Ingredientes',
-                hintText: 'Digite um ingriente por linha',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            TextField(
-              controller: _modoPreparoController,
-              maxLines: 5,
-              decoration: const InputDecoration(
-                labelText: 'Modo de preparo',
-                hintText: 'Digite uma etapa por linha',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            TextField(
-              controller: _tempoController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Tempo de preparo (minutos)',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            TextField(
-              controller: _rendimentoController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Rendimento (porções)',
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            DropdownButtonFormField<String>(
-              initialValue: _categoriaSelecionada,
-              decoration: const InputDecoration(
-                labelText: 'Categoria',
-                border: OutlineInputBorder(),
-              ),
-              items: const[
-                DropdownMenuItem(
-                  value: 'Café da manhã',
-                  child: Text('Café da manhã'),
+              const SizedBox(height: 20),
+        
+              TextField(
+                controller: _nomeController,
+                decoration: const InputDecoration(
+                  labelText: 'Nome da Receita',
+                  border: OutlineInputBorder(),
                 ),
-                DropdownMenuItem(
-                  value: 'Almoço',
-                  child: Text('Almoço'),
-                ),
-                DropdownMenuItem(
-                  value: 'Jantar',
-                  child: Text('Jantar'),
-                ),
-                DropdownMenuItem(
-                  value: 'Sobremesa',
-                  child: Text('Sobremesa'),
-                ),
-                DropdownMenuItem(
-                  value: 'Outras',
-                  child: Text('Outras'),
-                ),
-              ],
-              onChanged: (categoria) {
-                if (categoria == null) return;
-
-                setState(() {
-                  _categoriaSelecionada = categoria;
-                });
-              },
-            ),
-
-
-            const SizedBox(height: 24),
-
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: _salvarReceita,
-                icon: const Icon(Icons.save),
-                label: const Text('Salvar receita'),
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+        
+              TextField(
+                controller: _descricaoController,
+                maxLines: 3,
+                decoration: const InputDecoration(
+                  labelText: 'Descrição',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+        
+              TextField(
+                controller: _ingredientesController,
+                maxLines: 5,
+                decoration: const InputDecoration(
+                  labelText: 'Ingredientes',
+                  hintText: 'Digite um ingriente por linha',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+        
+              TextField(
+                controller: _modoPreparoController,
+                maxLines: 5,
+                decoration: const InputDecoration(
+                  labelText: 'Modo de preparo',
+                  hintText: 'Digite uma etapa por linha',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+        
+              TextField(
+                controller: _tempoController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Tempo de preparo (minutos)',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+        
+              TextField(
+                controller: _rendimentoController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Rendimento (porções)',
+                ),
+              ),
+              const SizedBox(height: 16),
+        
+              DropdownButtonFormField<String>(
+                initialValue: _categoriaSelecionada,
+                decoration: const InputDecoration(
+                  labelText: 'Categoria',
+                  border: OutlineInputBorder(),
+                ),
+                items: const[
+                  DropdownMenuItem(
+                    value: 'Café da manhã',
+                    child: Text('Café da manhã'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Almoço',
+                    child: Text('Almoço'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Jantar',
+                    child: Text('Jantar'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Sobremesa',
+                    child: Text('Sobremesa'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Outras',
+                    child: Text('Outras'),
+                  ),
+                ],
+                onChanged: (categoria) {
+                  if (categoria == null) return;
+        
+                  setState(() {
+                    _categoriaSelecionada = categoria;
+                  });
+                },
+              ),
+        
+        
+              const SizedBox(height: 24),
+        
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: _salvarReceita,
+                  icon: const Icon(Icons.save),
+                  label: const Text('Salvar receita'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
