@@ -17,6 +17,7 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
   final _rendimentoController = TextEditingController();
   final _ingredientesController = TextEditingController();
   final _modoPreparoController = TextEditingController();
+  String _categoriaSelecionada = 'Outras';
 
   @override
   void dispose() {
@@ -106,6 +107,46 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
                 labelText: 'Rendimento (porções)',
               ),
             ),
+            const SizedBox(height: 16),
+
+            DropdownButtonFormField<String>(
+              initialValue: _categoriaSelecionada,
+              decoration: const InputDecoration(
+                labelText: 'Categoria',
+                border: OutlineInputBorder(),
+              ),
+              items: const[
+                DropdownMenuItem(
+                  value: 'Café da manhã',
+                  child: Text('Café da manhã'),
+                ),
+                DropdownMenuItem(
+                  value: 'Almoço',
+                  child: Text('Almoço'),
+                ),
+                DropdownMenuItem(
+                  value: 'Jantar',
+                  child: Text('Jantar'),
+                ),
+                DropdownMenuItem(
+                  value: 'Sobremesa',
+                  child: Text('Sobremesa'),
+                ),
+                DropdownMenuItem(
+                  value: 'Outras',
+                  child: Text('Outras'),
+                ),
+              ],
+              onChanged: (categoria) {
+                if (categoria == null) return;
+
+                setState(() {
+                  _categoriaSelecionada = categoria;
+                });
+              },
+            ),
+
+
             const SizedBox(height: 24),
 
             SizedBox(
@@ -165,7 +206,7 @@ class _FormularioReceitaScreenState extends State<FormularioReceitaScreen> {
         rendimento: rendimento, 
         ingredientes: ingredientes, 
         modoDePreparo: modoPreparo, 
-        categoria: 'Outras', 
+        categoria: _categoriaSelecionada, 
         semGlutenVerificado: false,
     );
 
