@@ -51,6 +51,7 @@ class DetalhesReceitaScreen extends StatelessWidget {
 
                 Text('Tempo de preparo: ${receita.tempoDePreparo} minutos'),
                 Text('Rendimento: ${receita.rendimento} porções'),
+                Text('Categoria: ${receita.categoria}'),
 
                 const SizedBox(height: 16),
 
